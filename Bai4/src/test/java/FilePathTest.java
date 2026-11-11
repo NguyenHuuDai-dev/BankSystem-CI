@@ -1,7 +1,7 @@
-
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Files;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -10,14 +10,17 @@ public class FilePathTest {
     @Test
     public void testFilePath() {
 
-        // Duong dan viet cung theo Windows
-        File file = new File(
-                "src\\test\\resources\\sample.txt"
+        Path path = Path.of(
+                "src",
+                "test",
+                "resources",
+                "sample.txt"
         );
 
-        // Kiem tra file co ton tai khong
-        assertTrue(file.exists(),
+        assertTrue(Files.exists(path),
                 "File khong ton tai!");
     }
 }
+
+
 

@@ -1,14 +1,14 @@
+
 name: BankSystem Maven CI
 
 on:
   push:
-    branches: [ "**" ]
+    branches: ["**"]
   pull_request:
-    branches: [ "**" ]
+    branches: ["**"]
 
 jobs:
   build:
-    name: Test and package
     runs-on: ubuntu-latest
 
     steps:
@@ -19,16 +19,18 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '11'
+          java-version: "11"
           cache: maven
 
-      - name: Run Maven tests and package the JAR
-        run: mvn --batch-mode --no-transfer-progress clean verify
+      - name: Run Maven tests and package
+        working-directory: Bai3/BankSystem-refactored
+        run: mvn --batch-mode clean verify
 
-      - name: Upload generated JAR
+      - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
           name: banksystem-jar
-          path: target/*.jar
+          path: Bai3/BankSystem-refactored/target/*.jar
           if-no-files-found: error
           retention-days: 7
+

@@ -14,6 +14,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Bai3" target="25" />
+      <module name="Bai4 (1)" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

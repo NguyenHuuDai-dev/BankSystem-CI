@@ -1,5 +1,4 @@
-
-name: Java Matrix Testing
+name: Bai5 JaCoCo Coverage
 
 on:
   push:
@@ -9,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: Test on ${{ matrix.os }}
+    name: Bai5 on ${{ matrix.os }}
 
     runs-on: ${{ matrix.os }}
 
@@ -25,12 +24,21 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Set up JDK
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
 
-      - name: Run Maven Tests
-        run: mvn clean test
+      - name: Run Bai5 Maven Verify
+        run: mvn -f Bai5/pom.xml clean verify
+
+      - name: Upload JaCoCo Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report-${{ matrix.os }}
+          path: Bai5/target/site/jacoco/
+          if-no-files-found: warn
+          retention-days: 7

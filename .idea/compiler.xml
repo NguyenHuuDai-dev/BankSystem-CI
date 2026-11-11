@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Bai1" />
         <module name="bank-system" />
+        <module name="Bai4" />
         <module name="Bai2" />
       </profile>
     </annotationProcessing>

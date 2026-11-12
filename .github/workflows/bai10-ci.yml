@@ -1,20 +1,37 @@
-name: Java CI
+name: Bai10 - Fixed Java CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "Bai10/**"
+      - ".github/workflows/bai10-ci.yml"
+
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "Bai10/**"
+      - ".github/workflows/bai10-ci.yml"
 
 jobs:
   build:
+    name: Build and Test Bai10
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Download source code
       - name: Checkout source code
         uses: actions/checkout@v4
 
+      # 2. Setup Java 17
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
+          cache: maven
+          cache-dependency-path: Bai10/pom.xml
 
+      # 3. Build and run tests
       - name: Build with Maven
-        run: mvn -f Bai10/pom.xml package
+        run: mvn -B -f Bai10/pom.xml clean package

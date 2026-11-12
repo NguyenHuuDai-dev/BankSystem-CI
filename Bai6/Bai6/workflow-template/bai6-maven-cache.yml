@@ -1,0 +1,33 @@
+name: Bai6 Maven Dependency Cache
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "Bai6/**"
+      - ".github/workflows/bai6-maven-cache.yml"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "Bai6/**"
+      - ".github/workflows/bai6-maven-cache.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17 and restore Maven cache
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+          cache-dependency-path: Bai6/pom.xml
+
+      - name: Run Maven tests
+        run: mvn -B -f Bai6/pom.xml clean verify
+

@@ -1,0 +1,51 @@
+name: Bai7 Automated Code Review
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "Bai7/**"
+      - ".github/workflows/bai7-code-review.yml"
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
+jobs:
+  checkstyle:
+    name: Bai7 Checkstyle Review
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout pull request
+        uses: actions/checkout@v4
+
+      - name: Review Java code
+        uses: dbelyaev/action-checkstyle@v4.5.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          level: error
+          fail_level: error
+          filter_mode: added
+          workdir: Bai7
+
+  tests:
+    name: Bai7 Maven Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout pull request
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+          cache-dependency-path: Bai7/pom.xml
+
+      - name: Run Bai7 tests
+        run: mvn -B -f Bai7/pom.xml clean verify

@@ -6,12 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Bai1" />
-        <module name="bank-system" />
+        <module name="Bai7" />
         <module name="Bai6" />
         <module name="Bai5" />
         <module name="Bai4" />
         <module name="Bai2" />
+        <module name="Bai1" />
+        <module name="bank-system" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

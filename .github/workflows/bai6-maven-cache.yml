@@ -25,7 +25,6 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-          cache: maven
           cache-dependency-path: Bai6/pom.xml
 
       - name: Run Maven tests
